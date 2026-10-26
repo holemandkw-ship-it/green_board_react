@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default function PostItem({post}) {
     return (
@@ -6,5 +6,5 @@ export default function PostItem({post}) {
             <Link to={`/posts/${post.id}`}>{post.title}</Link>
             <div className="meta">{post.authorNickname} | {post.createdDatetime}</div>
         </li>
-    )
+    );
 }
