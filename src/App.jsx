@@ -41,8 +41,7 @@ export default function App() {
         <Route path="/posts/:postId" element={token ? <PostDetail /> : <Login />}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>
-
       <BoardFooter />
     </>
-  );
+  )
 }
