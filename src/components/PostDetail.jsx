@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuthContext } from "../useAuthContext";
 
-export default function PostDetail({ token }) {
+export default function PostDetail() {
+    const {token} = useAuthContext();
     const { postId } = useParams();
-
     const [post, setPost] = useState(null);
     const [comments, setComments] = useState([]);
     const [postMessage, setPostMessage] = useState("");
@@ -48,7 +49,7 @@ export default function PostDetail({ token }) {
             // 댓글 목록 조회
             try {
                 const response = await fetch(
-                    `http://127.0.0.1:8080/api/board/${postId}/comments`,
+                    `http://127.0.0.1:8080/api/board/${postId}/comment`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -109,7 +110,7 @@ export default function PostDetail({ token }) {
 
                     <ul id="comment-list">
                         {comments.length === 0 ? (
-                            <li>등록된 댓글이 없습니다.</li>
+                            "등록된 댓글이 없습니다."
                         ) : (
                             comments.map((comment) => (
                                 <li key={comment.id}>
@@ -121,10 +122,7 @@ export default function PostDetail({ token }) {
                     </ul>
 
                     <form id="comment-form">
-                        <label htmlFor="comment-content">
-                            댓글 내용
-                        </label>
-
+                        <label htmlFor="comment-content">댓글 내용</label>
                         <textarea
                             id="comment-content"
                             name="content"
